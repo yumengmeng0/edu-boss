@@ -1,5 +1,12 @@
-import { TokenService, UserService } from '../services'
-import { CHANGE_TITLE, CHANGE_SESSION, TOGGLE_SIDEBAR_COLLAPSE, CHANGE_BREADCRUMBS, INCREMENT, DECREMENT } from './mutation-types'
+import { TokenService, UserService } from "../services";
+import {
+  CHANGE_TITLE,
+  CHANGE_SESSION,
+  TOGGLE_SIDEBAR_COLLAPSE,
+  CHANGE_BREADCRUMBS,
+  INCREMENT,
+  DECREMENT
+} from "./mutation-types";
 
 /**
  * @type {import('vuex/types').ActionTree<typeof import('./state').default>}
@@ -9,7 +16,7 @@ const actions = {
    * 改变页面标题
    */
   changeTitle: ({ commit }, title) => {
-    commit(CHANGE_TITLE, title)
+    commit(CHANGE_TITLE, title);
   },
 
   /**
@@ -19,9 +26,9 @@ const actions = {
     const res = await TokenService.post({
       username: username.trim(),
       password: password.trim()
-    })
-    commit(CHANGE_SESSION, { token: res.data.token })
-    return res.data.token
+    });
+    commit(CHANGE_SESSION, { token: res.data.token });
+    return res.data.token;
   },
 
   /**
@@ -30,16 +37,16 @@ const actions = {
   checkToken: async ({ commit, getters }) => {
     // validate local store
     if (!getters.session.token) {
-      return Promise.resolve(false)
+      return Promise.resolve(false);
     }
     // remote
     try {
-      await TokenService.get()
-      return true
+      await TokenService.get();
+      return true;
     } catch (err) {
-      console.error(err)
-      commit(CHANGE_SESSION, { token: null })
-      return false
+      console.error(err);
+      commit(CHANGE_SESSION, { token: null });
+      return false;
     }
   },
 
@@ -47,8 +54,8 @@ const actions = {
    * 删除客户端令牌
    */
   deleteToken: async ({ commit, getters }) => {
-    await TokenService.delete(getters.session.token)
-    commit(CHANGE_SESSION, { token: null })
+    await TokenService.delete(getters.session.token);
+    commit(CHANGE_SESSION, { token: null });
   },
 
   /**
@@ -57,21 +64,21 @@ const actions = {
   getCurrentUser: async ({ commit }) => {
     // const res = await UserService.get('me')
     // commit(CHANGE_SESSION, { user: res.data })
-    return null
+    return null;
   },
 
   /**
    * 切换边栏的展开收起
    */
   toggleSidebarCollapse: ({ commit }) => {
-    commit(TOGGLE_SIDEBAR_COLLAPSE)
+    commit(TOGGLE_SIDEBAR_COLLAPSE);
   },
 
   /**
    * 修改面包屑导航
    */
   changeBreadcrumbs: ({ commit }, breadcrumbs) => {
-    commit(CHANGE_BREADCRUMBS, breadcrumbs)
+    commit(CHANGE_BREADCRUMBS, breadcrumbs);
   },
 
   // ==================== DEMO ====================
@@ -95,6 +102,6 @@ const actions = {
    * 减少计数器计数
    */
   decrementAsync: ({ commit }) => setTimeout(() => commit(DECREMENT), 1000)
-}
+};
 
-export default actions
+export default actions;

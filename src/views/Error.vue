@@ -2,7 +2,8 @@
   <section class="error">
     <h1>404</h1>
     <h2>Not Found</h2>
-    <footer>← Back to <router-link :to="{ name: 'Home' }">{{ name }}</router-link></footer>
+    <footer>← Back to <router-link :to="{ name: 'Home' }">{{ name }}</router-link>
+    </footer>
   </section>
 </template>
 
@@ -10,7 +11,7 @@
 export default {
   name: 'Error',
   title: 'Not Found',
-  data () {
+  data() {
     return {
       name: process.env.VUE_APP_NAME
     }

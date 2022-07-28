@@ -1,6 +1,8 @@
 <template>
   <el-container class="wrapper">
+    <!-- 左侧区域 -->
     <sidebar />
+    <!-- 右侧内容展示 -->
     <el-container direction="vertical">
       <navbar />
       <el-main>

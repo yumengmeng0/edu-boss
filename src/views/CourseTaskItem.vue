@@ -1,7 +1,7 @@
 <template>
   <section class="course-task-item">
     <div class="header">
-      <el-page-header @back="() => this.$router.back()" :content="content.title"/>
+      <el-page-header @back="() => this.$router.back()" :content="content.title" />
       <el-button type="primary" icon="el-icon-plus">保存</el-button>
     </div>
     <el-table :data="lessons" v-loading="loading" element-loading-text="数据加载中...">
@@ -28,14 +28,14 @@
 export default {
   name: 'CourseTaskItem',
   title: '课时配置',
-  data () {
+  data() {
     return {
       content: {},
       lessons: [],
       loading: true
     }
   },
-  created () {
+  created() {
     const { courseId, taskId } = this.$route.params
     this.$breadcrumbs = [
       { name: 'Courses', text: '课程管理' },
@@ -46,7 +46,7 @@ export default {
     this.loadData(courseId, taskId)
   },
   methods: {
-    loadData (courseId, taskId) {
+    loadData(courseId, taskId) {
       this.loading = true
       const params = {}
       params.course_id = courseId

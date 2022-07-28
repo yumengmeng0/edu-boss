@@ -2,7 +2,7 @@
  * Custom axios instance
  */
 
-import axios from 'axios'
+import axios from "axios";
 
 export default axios.create({
   baseURL: process.env.VUE_APP_API_BASE,
@@ -10,6 +10,6 @@ export default axios.create({
   headers: {
     // 'X-Custom-Header': 'foobar',
     // 'Authorization': true,
-    'X-Requested-With': 'XMLHttpRequest'
+    "X-Requested-With": "XMLHttpRequest"
   }
-})
+});

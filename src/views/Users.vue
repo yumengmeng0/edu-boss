@@ -5,13 +5,15 @@
         <el-input v-model="filter.id" placeholder="请输入用户 ID"/>
       </el-form-item> -->
       <el-form-item label="用户名">
-        <el-input v-model="filter.username" placeholder="请输入用户名"/>
+        <el-input v-model="filter.username" placeholder="请输入用户名" />
       </el-form-item>
       <el-form-item label="注册时间">
-        <el-date-picker v-model="filter.created" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" range-separator="至" :picker-options="pickerOptions"/>
+        <el-date-picker v-model="filter.created" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期"
+          range-separator="至" :picker-options="pickerOptions" />
       </el-form-item>
       <el-form-item label="最近登录时间">
-        <el-date-picker v-model="filter.last_login" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期" range-separator="至" :picker-options="pickerOptions"/>
+        <el-date-picker v-model="filter.last_login" type="daterange" start-placeholder="开始日期" end-placeholder="结束日期"
+          range-separator="至" :picker-options="pickerOptions" />
       </el-form-item>
       <el-form-item>
         <el-button @click="handleFilter">查询</el-button>
@@ -33,19 +35,24 @@
       <el-table-column prop="last_login" label="最近登录时间" width="180" :formatter="dateFormatter"></el-table-column>
       <el-table-column prop="status" label="状态" align="center" width="120">
         <template slot-scope="scope">
-          <i class="status status-success" title="正常" v-if="scope.row.status === 'activated'" @click="handleToggleStatus(scope.row)"></i>
+          <i class="status status-success" title="正常" v-if="scope.row.status === 'activated'"
+            @click="handleToggleStatus(scope.row)"></i>
           <i class="status status-warning" title="邮箱未激活" v-else-if="scope.row.status === 'email-unactivated'"></i>
           <i class="status status-warning" title="手机未激活" v-else-if="scope.row.status === 'phone-unactivated'"></i>
-          <i class="status status-danger" title="禁用" v-else-if="scope.row.status === 'forbidden'" @click="handleToggleStatus(scope.row)"></i>
+          <i class="status status-danger" title="禁用" v-else-if="scope.row.status === 'forbidden'"
+            @click="handleToggleStatus(scope.row)"></i>
         </template>
       </el-table-column>
       <el-table-column label="操作" align="center" width="120">
         <template slot-scope="scope">
-          <el-button size="mini" :type="scope.row.status === 'activated' ? 'danger' : 'success'" @click="handleToggleStatus(scope.row)">{{ scope.row.status === 'activated' ? '禁用' : '启用' }}</el-button>
+          <el-button size="mini" :type="scope.row.status === 'activated' ? 'danger' : 'success'"
+            @click="handleToggleStatus(scope.row)">{{ scope.row.status === 'activated' ? '禁用' : '启用' }}</el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination v-if="users.length" layout="total, sizes, prev, pager, next, jumper" @size-change="handlePageSizeChange" @current-change="handleCurrentPageChange" :current-page="page" :page-sizes="[20, 30, 50]" :page-size="size" :total="total"/>
+    <el-pagination v-if="users.length" layout="total, sizes, prev, pager, next, jumper"
+      @size-change="handlePageSizeChange" @current-change="handleCurrentPageChange" :current-page="page"
+      :page-sizes="[20, 30, 50]" :page-size="size" :total="total" />
   </section>
 </template>
 
@@ -53,12 +60,12 @@
 export default {
   name: 'Users',
   title: '用户管理',
-  data () {
+  data() {
     const pickerOptions = {
       shortcuts: [
         {
           text: '最近一周',
-          onClick (picker) {
+          onClick(picker) {
             const end = new Date()
             const start = new Date()
             start.setTime(start.getTime() - 3600 * 1000 * 24 * 7)
@@ -67,7 +74,7 @@ export default {
         },
         {
           text: '最近一个月',
-          onClick (picker) {
+          onClick(picker) {
             const end = new Date()
             const start = new Date()
             start.setTime(start.getTime() - 3600 * 1000 * 24 * 30)
@@ -76,7 +83,7 @@ export default {
         },
         {
           text: '最近三个月',
-          onClick (picker) {
+          onClick(picker) {
             const end = new Date()
             const start = new Date()
             start.setTime(start.getTime() - 3600 * 1000 * 24 * 90)
@@ -103,12 +110,12 @@ export default {
       loading: false
     }
   },
-  created () {
+  created() {
     // initial data
     this.loadUsers()
   },
   methods: {
-    loadUsers () {
+    loadUsers() {
       // toggle loading
       this.loading = true
 
@@ -148,32 +155,32 @@ export default {
         })
     },
 
-    handleCurrentPageChange (page) {
+    handleCurrentPageChange(page) {
       this.page = page
       this.loadUsers()
     },
 
-    handlePageSizeChange (size) {
+    handlePageSizeChange(size) {
       this.size = size
       this.loadUsers()
     },
 
-    handleFilter () {
+    handleFilter() {
       this.loadUsers()
     },
 
-    handleToggleStatus (item) {
+    handleToggleStatus(item) {
       const targetStatus = item.status === 'forbidden' ? 'activated' : 'forbidden'
       this.$services.user
         .patch(item.id, { status: targetStatus })
         .then(res => Object.assign(item, res.data))
     },
 
-    handleAdd () {
+    handleAdd() {
       this.$message({ message: '尚未规划此功能' })
     },
 
-    dateFormatter (row, column, value, index) {
+    dateFormatter(row, column, value, index) {
       // console.log(row, column, value, index)
       const date = new Date(value)
       // TODO: moment or dayjs or pure

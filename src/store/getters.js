@@ -28,6 +28,6 @@ const getters = {
    * 获取计数器值
    */
   count: state => state.count
-}
+};
 
-export default getters
+export default getters;

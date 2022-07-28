@@ -3,78 +3,33 @@
     <!-- 头部 -->
     <div class="header">
       <!-- 返回上一页 -->
-      <el-page-header
-        @back="() => this.$router.back()"
-        :content="course.title"
-      />
+      <el-page-header @back="() => this.$router.back()" :content="course.title" />
       <el-button type="primary" @click="handleSave">保存</el-button>
     </div>
 
     <!-- 表单开始 -->
     <el-form ref="form" :model="course" :rules="rules" label-width="120px">
-      <el-card
-        shadow="never"
-        v-loading="loading"
-        element-loading-text="数据加载中..."
-      >
+      <el-card shadow="never" v-loading="loading" element-loading-text="数据加载中...">
         <header slot="header">基本信息</header>
         <el-form-item label="名称" prop="course_name">
-          <el-input
-            v-model="course.course_name"
-            type="text"
-            maxlength="50"
-            show-word-limit
-          />
+          <el-input v-model="course.course_name" type="text" maxlength="50" show-word-limit />
         </el-form-item>
         <el-form-item label="简介" prop="brief">
-          <el-input
-            v-model="course.brief"
-            type="text"
-            maxlength="100"
-            show-word-limit
-          />
+          <el-input v-model="course.brief" type="text" maxlength="100" show-word-limit />
         </el-form-item>
         <el-form-item label="讲师姓名" prop="teacher_name">
-          <el-input
-            v-model="course.teacher_name"
-            type="text"
-            maxlength="50"
-            show-word-limit
-          />
+          <el-input v-model="course.teacher_name" type="text" maxlength="50" show-word-limit />
         </el-form-item>
         <el-form-item label="讲师简介" prop="teacher_title">
-          <el-input
-            v-model="course.teacher_info"
-            type="text"
-            maxlength="100"
-            show-word-limit
-          />
+          <el-input v-model="course.teacher_info" type="text" maxlength="100" show-word-limit />
         </el-form-item>
-        <el-form-item
-          label="课程概述"
-          prop="preview_first_field"
-          class="form-control-summary"
-        >
-          <el-input
-            v-model="course.preview_first_field"
-            type="text"
-            maxlength="20"
-            show-word-limit
-          />
-          <el-input
-            v-model="course.preview_second_field"
-            type="text"
-            maxlength="20"
-            show-word-limit
-          />
+        <el-form-item label="课程概述" prop="preview_first_field" class="form-control-summary">
+          <el-input v-model="course.preview_first_field" type="text" maxlength="20" show-word-limit />
+          <el-input v-model="course.preview_second_field" type="text" maxlength="20" show-word-limit />
         </el-form-item>
       </el-card>
 
-      <el-card
-        shadow="never"
-        v-loading="loading"
-        element-loading-text="数据加载中..."
-      >
+      <el-card shadow="never" v-loading="loading" element-loading-text="数据加载中...">
         <header slot="header">销售信息</header>
         <el-form-item label="售卖价格" prop="discounts">
           <el-input v-model="course.discounts" type="number">
@@ -87,59 +42,30 @@
           </el-input>
         </el-form-item>
         <el-form-item label="活动标签">
-          <el-input
-            v-model="course.price_tag"
-            type="text"
-            maxlength="4"
-            show-word-limit
-          />
+          <el-input v-model="course.price_tag" type="text" maxlength="4" show-word-limit />
         </el-form-item>
       </el-card>
 
-      <el-card
-        shadow="never"
-        v-loading="loading"
-        element-loading-text="数据加载中..."
-      >
+      <el-card shadow="never" v-loading="loading" element-loading-text="数据加载中...">
         <header slot="header">分享信息</header>
         <!-- 上传图片部分 -->
         <el-form-item label="分享小图" prop="share_image_title">
           <el-input v-model="course.share_image_title" type="text">
             <!-- :auto-upload="false",取消自动上传, :on-change="onchange" 调用onchange进行处理 -->
-            <el-upload
-              slot="prepend"
-              :auto-upload="false"
-              :on-change="onchange"
-              action
-              :limit="1"
-            >
+            <el-upload slot="prepend" :auto-upload="false" :on-change="onchange" action :limit="1">
               <el-button size="small" type="primary">点击上传</el-button>
             </el-upload>
           </el-input>
         </el-form-item>
         <el-form-item label="分享标题" prop="share_title">
-          <el-input
-            v-model="course.share_title"
-            type="text"
-            maxlength="40"
-            show-word-limit
-          />
+          <el-input v-model="course.share_title" type="text" maxlength="40" show-word-limit />
         </el-form-item>
         <el-form-item label="分享简介" prop="share_description">
-          <el-input
-            v-model="course.share_description"
-            type="text"
-            maxlength="60"
-            show-word-limit
-          />
+          <el-input v-model="course.share_description" type="text" maxlength="60" show-word-limit />
         </el-form-item>
       </el-card>
 
-      <el-card
-        shadow="never"
-        v-loading="loading"
-        element-loading-text="数据加载中..."
-      >
+      <el-card shadow="never" v-loading="loading" element-loading-text="数据加载中...">
         <header slot="course_description">课程详情</header>
         <editor v-model="course.course_description" />
       </el-card>
@@ -238,6 +164,7 @@ export default {
   methods: {
     //方法1: 保存和修改课程信息
     handleSave() {
+      // <el-form ref="form" 
       //检查是否拿到了正确的需要验证的form
       this.$refs.form.validate(valid => {
         if (!valid) return false;
@@ -282,6 +209,13 @@ export default {
       //判断文件不为空
       if (file != null) {
         //将文件信息 保存到params中
+        /*
+          参数1：文件上传项
+          参数2：文件二进制数据
+          参数3：文件名
+
+          append是谁的函数？？？
+        */
         this.params.append("file", file.raw, file.name);
       }
     },

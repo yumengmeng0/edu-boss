@@ -2,8 +2,8 @@
  * Wrapper NProgress with style
  */
 
-import 'nprogress/nprogress.css'
-import nprogress from 'nprogress'
+import "nprogress/nprogress.css";
+import nprogress from "nprogress";
 
 // config
 nprogress.configure({
@@ -15,6 +15,6 @@ nprogress.configure({
   // trickleRate: 0.02,
   // trickleSpeed: 800,
   showSpinner: false
-})
+});
 
-export default nprogress
+export default nprogress;

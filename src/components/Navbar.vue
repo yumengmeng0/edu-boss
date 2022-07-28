@@ -1,9 +1,11 @@
 <template>
   <el-header class="navbar" height="auto">
-    <el-button class="hamburger" type="text" :icon="sidebar.collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'" @click="toggleCollapse"></el-button>
+    <el-button class="hamburger" type="text" :icon="sidebar.collapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'"
+      @click="toggleCollapse"></el-button>
     <el-breadcrumb separator="/" replace>
       <el-breadcrumb-item :to="{ name: 'Home' }">Home</el-breadcrumb-item>
-      <el-breadcrumb-item v-for="item in navbar.breadcrumbs" :key="item.name" :to="item">{{ item.text || item.name }}</el-breadcrumb-item>
+      <el-breadcrumb-item v-for="item in navbar.breadcrumbs" :key="item.name" :to="item">{{ item.text || item.name }}
+      </el-breadcrumb-item>
     </el-breadcrumb>
     <el-dropdown @command="handleCommand" v-if="session.user">
       <img class="avatar" :src="session.user.avatar" :alt="session.user.name" :title="session.user.name">
@@ -27,7 +29,7 @@ export default {
     session: 'session'
   }),
 
-  created () {
+  created() {
     this.$store.dispatch('getCurrentUser')
   },
 
@@ -35,8 +37,8 @@ export default {
     ...mapActions({
       toggleCollapse: 'toggleSidebarCollapse'
     }),
-    async handleCommand (command) {
-   
+    async handleCommand(command) {
+
       switch (command) {
         case 'logout':
           await this.$store.dispatch('deleteToken')

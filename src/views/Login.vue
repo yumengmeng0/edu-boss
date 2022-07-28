@@ -1,18 +1,22 @@
 <template>
   <section class="login">
     <header>
-      <h1><router-link to="/" tabindex="-1">{{ name }}</router-link></h1>
-      <el-alert v-if="error" :title="error.title" type="warning" :description="error.message" show-icon/>
+      <h1>
+        <router-link to="/" tabindex="-1">{{ name }}</router-link>
+      </h1>
+      <el-alert v-if="error" :title="error.title" type="warning" :description="error.message" show-icon />
     </header>
-    <el-form auto-complete="off" :model="model" :rules="rules" ref="login-form" label-position="top" :class="{ shaking: error }">
+    <el-form auto-complete="off" :model="model" :rules="rules" ref="login-form" label-position="top"
+      :class="{ shaking: error }">
       <h2>Sign-in</h2>
       <el-form-item label="Login" prop="username">
-        <el-input type="text" v-model="model.username" placeholder="Please enter username"/>
+        <el-input type="text" v-model="model.username" placeholder="Please enter username" />
       </el-form-item>
       <el-form-item label="Password" prop="password">
-        <el-input type="password" v-model="model.password" placeholder="Please enter password"/>
+        <el-input type="password" v-model="model.password" placeholder="Please enter password" />
       </el-form-item>
-      <el-button type="primary" :loading="loading" @click="submit('login-form')">{{ loading ? 'Loading...' : 'Login' }}</el-button>
+      <el-button type="primary" :loading="loading" @click="submit('login-form')">{{ loading ? 'Loading...' : 'Login' }}
+      </el-button>
     </el-form>
     <footer>
       ← Back to <a href="https://lagou.com">Lagou</a>
@@ -24,7 +28,7 @@
 export default {
   name: 'Login',
 
-  data () {
+  data() {
     // form model
     // TODO: remove default values
     const model = {
@@ -58,7 +62,7 @@ export default {
   },
 
   methods: {
-    submit (ref) {
+    submit(ref) {
       // form validate
       this.$refs[ref].validate(valid => {
         if (!valid) return false
@@ -166,6 +170,7 @@ export default {
   }
 
   @keyframes shakeX {
+
     from,
     to {
       transform: translate3d(0, 0, 0);

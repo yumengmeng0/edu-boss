@@ -1,4 +1,5 @@
 import Layout from "../views/Layout.vue";
+import Tree from "@/components/TestTree.vue";
 
 /**
  * @type {import('vue-router/types/router').RouteConfig[]}
@@ -8,6 +9,7 @@ const routes = [
     path: "/",
     component: Layout,
 
+    // 添加子路由，children属性表示子路由
     children: [
       {
         path: "/courses",
@@ -18,9 +20,13 @@ const routes = [
       {
         path: "/",
         name: "Home",
-        component: () =>
-          import(/* webpackChunkName: 'courses' */ "../views/Courses.vue")
+        component: () => import("../components/TestTree.vue")
       },
+      // {
+      //   path: "/",
+      //   name: "Home",
+      //   component: () => import("../views/Courses.vue")
+      // },
 
       //添加课程的路由
       {
@@ -28,7 +34,7 @@ const routes = [
         name: "CourseItem",
         component: () =>
           //路由导航到的组件
-          import(/* webpackChunkName: 'courses' */ "../views/CourseItem.vue")
+          import("../views/CourseItem.vue")
       },
 
       //内容管理的路由

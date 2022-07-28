@@ -1,4 +1,11 @@
-import { CHANGE_TITLE, CHANGE_SESSION, TOGGLE_SIDEBAR_COLLAPSE, CHANGE_BREADCRUMBS, INCREMENT, DECREMENT } from './mutation-types'
+import {
+  CHANGE_TITLE,
+  CHANGE_SESSION,
+  TOGGLE_SIDEBAR_COLLAPSE,
+  CHANGE_BREADCRUMBS,
+  INCREMENT,
+  DECREMENT
+} from "./mutation-types";
 
 /**
  * @type {import('vuex/types').MutationTree<typeof import('./state').default>}
@@ -8,7 +15,7 @@ const mutations = {
    * 改变页面标题
    */
   [CHANGE_TITLE]: (state, title) => {
-    state.title = title
+    state.title = title;
   },
 
   /**
@@ -16,21 +23,21 @@ const mutations = {
    */
   [CHANGE_SESSION]: (state, session) => {
     // TODO: new session mixin
-    Object.assign(state.session, session)
+    Object.assign(state.session, session);
   },
 
   /**
    * 切换边栏的展开收起
    */
   [TOGGLE_SIDEBAR_COLLAPSE]: state => {
-    state.sidebar.collapse = !state.sidebar.collapse
+    state.sidebar.collapse = !state.sidebar.collapse;
   },
 
   /**
    * 修改面包屑导航
    */
   [CHANGE_BREADCRUMBS]: (state, breadcrumbs) => {
-    state.navbar.breadcrumbs = breadcrumbs
+    state.navbar.breadcrumbs = breadcrumbs;
   },
 
   // ==================== DEMO ====================
@@ -39,15 +46,15 @@ const mutations = {
    * 增加计数器计数
    */
   [INCREMENT]: state => {
-    state.count++
+    state.count++;
   },
 
   /**
    * 减少计数器计数
    */
   [DECREMENT]: state => {
-    state.count--
+    state.count--;
   }
-}
+};
 
-export default mutations
+export default mutations;

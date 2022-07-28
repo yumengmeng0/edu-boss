@@ -1,27 +1,28 @@
-import Vue from 'vue'
-import Element from 'element-ui'
-import plugins from './plugins'
-import router from './router'
-import store from './store'
-import App from './App.vue'
+import Vue from "vue";
+import Element from "element-ui";
+import plugins from "./plugins";
+import router from "./router";
+import store from "./store";
+import App from "./App.vue";
 
 // global styles
-import './style.scss'
+import "./style.scss";
 
 // global config
-Vue.config.silent = process.env.NODE_ENV === 'production'
-Vue.config.productionTip = false
+Vue.config.silent = process.env.NODE_ENV === "production";
+Vue.config.productionTip = false;
 
-// plugins  
-Vue.use(Element)
-Vue.use(plugins)
+// plugins
+Vue.use(Element);
+Vue.use(plugins);
 
 // root components
 const app = new Vue({
   router,
   store,
   render: h => h(App)
-})
+});
 
+// 首页 <div class="app"></div>在public\index.html
 // mount to dom
-app.$mount('#app')
+app.$mount("#app");

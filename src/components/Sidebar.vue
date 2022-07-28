@@ -1,5 +1,6 @@
 <template>
   <el-aside class="sidebar" width="auto">
+    <!-- 左上角logo -->
     <router-link class="logo" :class="{ collapse: sidebar.collapse }" :to="{ name: 'Home' }" title="Back to Home">
       <img src="../assets/logo.png" alt="LagouEdu">
       <h1>{{ name }}</h1>
@@ -11,7 +12,8 @@
             <i :class="'el-icon-' + item.icon"></i>
             <span>{{ item.text }}</span>
           </template>
-          <el-menu-item  v-for="(sub, j) in item.children" :key="j" :index="sub.name" :route="sub">{{ sub.text }}</el-menu-item>
+          <el-menu-item v-for="(sub, j) in item.children" :key="j" :index="sub.name" :route="sub">{{ sub.text }}
+          </el-menu-item>
         </el-submenu>
         <el-menu-item v-else :key="i" :index="item.name" :route="item">
           <i :class="'el-icon-' + item.icon"></i>
@@ -36,7 +38,7 @@ import { mapGetters, mapActions } from 'vuex'
 export default {
   name: 'app-sidebar',
 
-  data () {
+  data() {
     return {
       name: process.env.VUE_APP_NAME
     }
@@ -69,7 +71,7 @@ export default {
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color:rgba(0, 0, 0, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
     border-radius: 2em;
   }
 

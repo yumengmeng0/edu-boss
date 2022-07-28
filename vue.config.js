@@ -7,7 +7,7 @@ module.exports = {
   // relative path for dev
   publicPath: process.env.NODE_ENV === "production" ? "/edu-boss/" : "/",
   // for gh-pages
-  indexPath: "404.html",
+  indexPath: "index.html",
   assetsDir: "assets",
   lintOnSave: process.env.NODE_ENV !== "production",
   productionSourceMap: false,
@@ -16,6 +16,6 @@ module.exports = {
   },
   devServer: {
     open: true,
-    port: 8081
+    port: 8082
   }
 };

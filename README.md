@@ -1,6 +1,6 @@
 # 拉勾教育课程管理系统 前端
 
-对应的项目后端单体架构项目地址：https://github.com/yumengmeng92/lagou_edu_home
+对应的JavaWeb项目后端单体架构项目地址：https://github.com/yumengmeng92/lagou_edu_home
 ![alt 拉勾教育课程管理系统](images/拉勾教育课程管理系统.PNG "拉勾教育课程管理系统")
 
 ```shell

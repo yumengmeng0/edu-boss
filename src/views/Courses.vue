@@ -3,7 +3,11 @@
     <!-- 表单部分 -->
     <el-form class="actions" :inline="true" :model="filter">
       <el-form-item class="input-title" label="课程名称">
-        <el-input v-model="filter.course_name" type="search" placeholder="课程名称" />
+        <el-input
+          v-model="filter.course_name"
+          type="search"
+          placeholder="课程名称"
+        />
       </el-form-item>
 
       <el-form-item label="状态">
@@ -19,29 +23,57 @@
       </el-form-item>
 
       <el-form-item class="btn-add">
-        <el-button type="primary" icon="el-icon-plus" @click="addCourse">新建课程</el-button>
+        <el-button type="primary" icon="el-icon-plus" @click="addCourse"
+          >新建课程</el-button
+        >
       </el-form-item>
     </el-form>
 
     <!-- 表格部分 -->
     <!-- 
-
       表格的数据是courses
       el-table-column中prop对应属性
      -->
-    <el-table :data="courses" v-loading="loading" element-loading-text="数据加载中...">
+    <el-table
+      :data="courses"
+      v-loading="loading"
+      element-loading-text="数据加载中..."
+    >
       <el-table-column prop="id" label="ID" width="100"></el-table-column>
-      <el-table-column prop="course_name" label="课程名称" width="200"></el-table-column>
-      <el-table-column prop="price" label="价格" align="center" width="120" :formatter="priceFormatter"></el-table-column>
-      <el-table-column prop="sort_num" label="排序" align="center" width="120"></el-table-column>
+      <el-table-column
+        prop="course_name"
+        label="课程名称"
+        width="200"
+      ></el-table-column>
+      <el-table-column
+        prop="price"
+        label="价格"
+        align="center"
+        width="120"
+        :formatter="priceFormatter"
+      ></el-table-column>
+      <el-table-column
+        prop="sort_num"
+        label="排序"
+        align="center"
+        width="120"
+      ></el-table-column>
 
       <!-- 状态展示 -->
       <el-table-column prop="status" label="状态" align="center" width="120">
         <!-- scope是每行的对象 -->
         <template slot-scope="scope">
-          <i class="status status-success" title="已发布" v-if="scope.row.status == '1'"
-            @click="updateStatus(scope.row)"></i>
-          <i class="status status-warning" title="草稿" v-else-if="scope.row.status == '0'"></i>
+          <i
+            class="status status-success"
+            title="已发布"
+            v-if="scope.row.status == '1'"
+            @click="updateStatus(scope.row)"
+          ></i>
+          <i
+            class="status status-warning"
+            title="草稿"
+            v-else-if="scope.row.status == '0'"
+          ></i>
         </template>
       </el-table-column>
 
@@ -50,20 +82,31 @@
         <!-- scope一行的对象 -->
         <template slot-scope="scope">
           <!-- 状态按钮 -->
-          <el-button size="mini" :type="scope.row.status == '1' ? 'danger' : 'success'"
-            @click="updateStatus(scope.row)">{{ scope.row.status == "1" ? "下架" : "发布" }}</el-button>
+          <el-button
+            size="mini"
+            :type="scope.row.status == '1' ? 'danger' : 'success'"
+            @click="updateStatus(scope.row)"
+            >{{ scope.row.status == "1" ? "下架" : "发布" }}</el-button
+          >
 
           <!-- 营销信息按钮 -->
-          <el-button size="mini" @click="handleNavigate('CourseItem', scope.row.id)">营销信息</el-button>
+          <el-button
+            size="mini"
+            @click="handleNavigate('CourseItem', scope.row.id)"
+            >营销信息</el-button
+          >
 
           <!-- 内容管理按钮 -->
-          <el-button size="mini" @click="handleNavigate('CourseTasks', scope.row.id)">内容管理</el-button>
+          <el-button
+            size="mini"
+            @click="handleNavigate('CourseTasks', scope.row.id)"
+            >内容管理</el-button
+          >
         </template>
       </el-table-column>
     </el-table>
   </section>
 </template>
-
 
 <script>
 //引入axios
@@ -84,28 +127,33 @@ export default {
   //钩子函数
   created() {
     this.loadCourses();
+    console.log("created");
+    console.log(this.courses);
   },
 
   methods: {
     //方法1: 获取课程列表
     loadCourses() {
       this.loading = true;
-
+      // let name = "1";
       //请求后台查询课程列表接口
-      return axios
+      // axios是异步函数需要return
+      return  axios
         .get("/course", {
           params: {
             methodName: "findCourseList"
           }
         })
         .then(resp => {
-          console.log(resp);
+          // console.log(resp);
           this.loading = false; //关闭加载
           this.courses = resp.data; //取出数据
+          // name = "hello";
         })
         .catch(error => {
           this.$message.error("数据获取失败! ! !");
         });
+      // console.log(this.courses);
     },
 
     //方法2: 条件查询课程信息
@@ -149,7 +197,6 @@ export default {
     //  传入的是scope.row该行的对象
     //方法4: 修改课程状态
     updateStatus(item) {
-
       /*
         scope
 
@@ -160,7 +207,7 @@ export default {
         status: 1
       
       */
-      console.log(item)
+      console.log(item);
       //item 表示选中的数据 = Course对象
       axios
         .get("/course", {
@@ -176,7 +223,8 @@ export default {
 
           //重新加载页面
           window.location.reload;
-        }).catch(error => {
+        })
+        .catch(error => {
           this.$message.error("状态修改失败");
         });
     },
